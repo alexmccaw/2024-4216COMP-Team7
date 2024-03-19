@@ -1,0 +1,57 @@
+import pandas as pd
+import csv
+import matplotlib.pyplot as plt
+
+def extractColumn(columnNumber):       
+    # code to read the data
+    data = pd.read_csv('spotify-2023.csv', encoding = 'latin1')
+    with open ('spotify-2023.csv', 'r') as f:
+        csv_reader = csv.reader(f)
+        next(csv_reader) # this line skips the header
+
+        #now we can read the data from any column using the columnNumber parameter
+        columnData = []
+        for row in csv_reader:
+            data = row[columnNumber]
+            columnData.append(data)
+        return columnData
+
+def extractRow(rowNumber):
+    data = pd.read_csv('spotify-2023.csv', encoding = 'ISO-8859-1')
+    rowData = data.loc[rowNumber]
+    return rowData
+
+def removeDuplicates(list):
+    newList = []
+    for item in list:
+        if item not in newList:
+            newList.append(item)
+    return newList
+            
+def mapToInteger(userList):
+    temp = map(int, userList)
+    mappedList = list(temp)
+    return mappedList
+
+def createLineGraph(title, subtitle, xData, yData, xLabel, yLabel):
+    fig, ax = plt.subplots()
+    fig.suptitle("Graph of BPM against Streams")
+    ax.set_title("Example")
+    ax.set_xlabel("BPM")
+    ax.set_ylabel("Streams")
+    ax.plot(sorted(bpmData), sorted(streamsData))
+    plt.show()
+
+#Example of how to use functions
+#bpmData = mapToInteger(extractColumn(14))
+#streamsData = mapToInteger(extractColumn(8))
+
+#fig, ax = plt.subplots()
+#fig.suptitle("Graph of BPM against Streams")
+#ax.set_title("Example")
+#ax.set_xlabel("BPM")
+#ax.set_ylabel("Streams")
+#ax.plot(sorted(bpmData), sorted(streamsData))
+#plt.show()
+
+
