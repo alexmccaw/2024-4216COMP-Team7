@@ -16,42 +16,35 @@ def extractColumn(columnNumber):
             columnData.append(data)
         return columnData
 
-def extractRow(rowNumber):
+def extractRow(rowNumber): # code to extract a particular row from the data
     data = pd.read_csv('spotify-2023.csv', encoding = 'ISO-8859-1')
     rowData = data.loc[rowNumber]
     return rowData
 
-def removeDuplicates(list):
+def removeDuplicates(list): # code to remove any duplicates from the list if needed
     newList = []
     for item in list:
         if item not in newList:
             newList.append(item)
     return newList
             
-def mapToInteger(userList):
+def mapToInteger(userList): # code to map all the items in a list of data to integers
     temp = map(int, userList)
     mappedList = list(temp)
     return mappedList
 
-def createLineGraph(title, subtitle, xData, yData, xLabel, yLabel):
+def createLineGraph(title, subtitle, xData, yData, xLabel, yLabel): # code to create a basic graph using user data
     fig, ax = plt.subplots()
-    fig.suptitle("Graph of BPM against Streams")
-    ax.set_title("Example")
-    ax.set_xlabel("BPM")
-    ax.set_ylabel("Streams")
-    ax.plot(sorted(bpmData), sorted(streamsData))
+    fig.suptitle(title)
+    ax.set_title(subtitle)
+    ax.set_xlabel(xLabel)
+    ax.set_ylabel(yLabel)
+    ax.plot(sorted(xData), sorted(yData))
     plt.show()
 
 #Example of how to use functions
 #bpmData = mapToInteger(extractColumn(14))
-#streamsData = mapToInteger(extractColumn(8))
-
-#fig, ax = plt.subplots()
-#fig.suptitle("Graph of BPM against Streams")
-#ax.set_title("Example")
-#ax.set_xlabel("BPM")
-#ax.set_ylabel("Streams")
-#ax.plot(sorted(bpmData), sorted(streamsData))
-#plt.show()
+#streamsData = mapToInteger(extractColumn(9))
+#createLineGraph("Graph of BPM against Streams", "Example", "BPM", "Streams")
 
 
