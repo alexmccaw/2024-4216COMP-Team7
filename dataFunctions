@@ -28,9 +28,14 @@ def removeDuplicates(list): # code to remove any duplicates from the list if nee
             newList.append(item)
     return newList
             
-def mapToInteger(userList): # code to map all the items in a list of data to integers
-    temp = map(int, userList)
-    mappedList = list(temp)
+def mapToInteger(userList):
+    mappedList = []
+    for item in userList:
+        try:
+            mappedList.append(int(item))
+        except ValueError:
+            # If the item cannot be converted to an integer, ignore it
+            mappedList.append(-1)
     return mappedList
 
 def createLineGraph(title, subtitle, xData, yData, xLabel, yLabel): # code to create a basic graph using user data
@@ -44,7 +49,7 @@ def createLineGraph(title, subtitle, xData, yData, xLabel, yLabel): # code to cr
 
 #Example of how to use functions
 #bpmData = mapToInteger(extractColumn(14))
-#streamsData = mapToInteger(extractColumn(9))
-#createLineGraph("Graph of BPM against Streams", "Example", "BPM", "Streams")
+#streamsData = mapToInteger(extractColumn(8))
+#createLineGraph("Graph of BPM against Streams", "Example", bpmData, streamsData, "BPM", "Streams")
 
 
