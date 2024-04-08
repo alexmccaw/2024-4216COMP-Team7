@@ -47,6 +47,24 @@ def createLineGraph(title, subtitle, xData, yData, xLabel, yLabel): # code to cr
     ax.plot(sorted(xData), sorted(yData))
     plt.show()
 
+
+def createScatterGraph(title, subtitle, xData, yData, xLabel, yLabel):
+    plt.title(title)
+    plt.subtitle(subtitle)
+    plt.scatter(xData, yData)
+    plt.xLabel(xLabel)
+    plt.ylabel(yLabel)
+    plt.show()
+
+def createBarChart(title, subtitle, xData, yData, xLabel, yLabel):
+    plt.title(title)
+    plt.subtitle(subtitle)
+    plt.bar(xData, yData)
+    plt.xLabel(xLabel)
+    plt.ylabel(yLabel)
+    plt.show()
+
+    
 #Example of how to use functions
 #bpmData = mapToInteger(extractColumn(14))
 #streamsData = mapToInteger(extractColumn(8))
