@@ -51,17 +51,17 @@ def createLineGraph(title, subtitle, xData, yData, xLabel, yLabel): # code to cr
 
 def createScatterGraph(title, subtitle, xData, yData, xLabel, yLabel):
     plt.title(title)
-    plt.subtitle(subtitle)
+    plt.suptitle(subtitle)
     plt.scatter(xData, yData)
-    plt.xLabel(xLabel)
+    plt.xlabel(xLabel)
     plt.ylabel(yLabel)
     plt.show()
 
 def createBarChart(title, subtitle, xData, yData, xLabel, yLabel):
     plt.title(title)
-    plt.subtitle(subtitle)
+    plt.suptitle(subtitle)
     plt.bar(xData, yData)
-    plt.xLabel(xLabel)
+    plt.xlabel(xLabel)
     plt.ylabel(yLabel)
     plt.show()
 
@@ -72,6 +72,12 @@ def createBarChart(title, subtitle, xData, yData, xLabel, yLabel):
 #createLineGraph("Graph of BPM against Streams", "Example", bpmData, streamsData, "BPM", "Streams")
 
 #--- CODE YOUR INDIVIDUAL WORK IN THIS SPACE ---
+    
+keyData = (extractColumn(15))
+streamsData = mapToInteger(extractColumn(8))
+createBarChart("Graph of Key's Affect on Streams", "Example", keyData, streamsData, "Key", "Streams")
+
+
 
 # GRAPHICAL USER INTERFACE 
 # GUI function
