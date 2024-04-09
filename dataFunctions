@@ -65,14 +65,16 @@ def createBarChart(title, subtitle, xData, yData, xLabel, yLabel):
     plt.ylabel(yLabel)
     plt.show()
 
-def createDualLineGraph(title, subtitle, xData, yData1, yData2, xLabel, yLabel):
+def createDualLineGraph(title, subtitle, xData, yData1, yData2, xLabel, yLabel1, yLabel2):
     fig, ax = plt.subplots()
     plt.title(title)
     plt.suptitle(subtitle)
     ax.plot(sorted(xData), sorted(yData1), 'b', linewidth = '3')
-    ax.plot(sorted(xData), sorted(yData2), 'r', linewidth = '3')
+    ax.set_ylabel(yLabel1, color = 'b')
+    ax1=ax.twinx()
+    ax1.plot(sorted(xData), sorted(yData2), 'r', linewidth = '3')
+    ax1.set_ylabel(yLabel2, color = 'r')
     plt.xlabel(xLabel)
-    plt.ylabel(yLabel)
     plt.show()
     
 #Example of how to use functions
@@ -81,6 +83,37 @@ def createDualLineGraph(title, subtitle, xData, yData1, yData2, xLabel, yLabel):
 #createLineGraph("Graph of BPM against Streams", "Example", bpmData, streamsData, "BPM", "Streams")
 
 #--- CODE YOUR INDIVIDUAL WORK IN THIS SPACE ---
+    
+
+streamsData = mapToInteger(extractColumn(8))
+spotifyPlaylistData = mapToInteger(extractColumn(6))
+appleMusicPlaylistData = mapToInteger(extractColumn(9))
+createDualLineGraph("Streams in Spotify and Apple Playlists", "The number of streams in spotify and Apple Playlists", streamsData, spotifyPlaylistData, appleMusicPlaylistData, "Streams", "Spotify Playlist", "Apple Music Playlist")
+
+streamsData = mapToInteger(extractColumn(8))
+spotifyPlaylistData = mapToInteger(extractColumn(6))
+shazamChartsData = mapToInteger(extractColumn(13))
+createDualLineGraph("Streams in Spotify Playlists and Shazam Charts", "The number of streams in Spotify Playlists and the Shazam Charts", streamsData, spotifyPlaylistData, shazamChartsData, "Streams", "Spotify Playlist", "Shazam Charts")
+
+streamsData = mapToInteger(extractColumn(8))
+spotifyChartsData = mapToInteger(extractColumn(7))
+shazamChartsData = mapToInteger(extractColumn(13))
+createDualLineGraph("Streams in Spotify Charts and Shazam Charts", "The number of streams in Spotify Charts and the Shazam Charts", streamsData, spotifyChartsData, shazamChartsData, "Streams", "Spotify Charts", "Shazam Charts")
+
+streamsData = mapToInteger(extractColumn(8))
+appleMusicChartsData = mapToInteger(extractColumn(10))
+spotifyChartsData = mapToInteger(extractColumn(7))
+createDualLineGraph("Streams in Apple Playlists and the Spotify Charts", "The number of streams in Apple Music Playlists and the Spotify Charts", streamsData, appleMusicChartsData, spotifyChartsData, "Streams", "Apple Music Charts", "Spotify Charts")
+
+streamsData = mapToInteger(extractColumn(8))
+shazamChartsData = mapToInteger(extractColumn(13))
+appleMusicChartsData = mapToInteger(extractColumn(10))
+createDualLineGraph("Streams in the Shazam Charts and Apple Music Charts", "The number of streams in Shazam Charts and the Apple Music Charts", streamsData, shazamChartsData, appleMusicChartsData, "Streams", "Shazam Charts", "Apple Music Charts")
+
+streamsData = mapToInteger(extractColumn(8))
+shazamChartsData = mapToInteger(extractColumn(13))
+appleMusicPlaylistData = mapToInteger(extractColumn(9))
+createDualLineGraph("Streams in the Shazam Charts and the Apple Music Playlists", "The number of streams in Shazam Charts and the Apple Music Playlists", streamsData, shazamChartsData, appleMusicPlaylistData, "Streams", "Shazam Charts", "Apple Music Playlist")
     
 keyData = (extractColumn(15))
 streamsData = mapToInteger(extractColumn(8))
