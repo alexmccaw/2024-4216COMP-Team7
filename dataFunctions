@@ -78,6 +78,41 @@ streamsData = mapToInteger(extractColumn(8))
 createBarChart("Graph of Key's Affect on Streams", "Example", keyData, streamsData, "Key", "Streams")
 
 
+releaseYearData = mapToInteger(extractColumn(3))
+danceabilityData = mapToInteger(extractColumn(17))
+createLineGraph("Release Year for Danceability", "Finding the trend for the release year and the danceability", releaseYearData, danceabilityData, "Release Year", "Danceability")
+
+releaseYearData = mapToInteger(extractColumn(3))
+valenceData = mapToInteger(extractColumn(18))
+createLineGraph("Release Year for Valence", "Finding the trend for the release year and the valnce", releaseYearData, valenceData, "Release Year", "Valence")
+
+releaseYearData = mapToInteger(extractColumn(3))
+energyData = mapToInteger(extractColumn(19))
+createLineGraph("Release Year for Energy", "Finding the trend for the release year and the Energy", releaseYearData, energyData, "Release Year", "Energy")
+
+releaseMonthData = mapToInteger(extractColumn(4))
+danceabilityData = mapToInteger(extractColumn(17))
+createLineGraph("Release Month for Danceability", "Finding the trend for the release month and the Danceability", releaseMonthData, danceabilityData, "Release Month", "Danceability")
+
+releaseMonthData = mapToInteger(extractColumn(4))
+valenceData = mapToInteger(extractColumn(18))
+createLineGraph("Release Month for Valence", "Finding the trend for the release month and the Valence", releaseMonthData, valenceData, "Release Month", "Valence")
+
+releaseMonthData = mapToInteger(extractColumn(4))
+energyData = mapToInteger(extractColumn(19))
+createLineGraph("Release Month for Energy", "Finding the trend for the release month and the Energy", releaseMonthData, energyData, "Release Month", "Energy")
+
+releaseDayData = mapToInteger(extractColumn(5))
+danceabilityData = mapToInteger(extractColumn(17))
+createLineGraph("Release Day for Danceability", "Finding the trend for the release day and the Danceability", releaseDayData, danceabilityData, "Release Day", "Danceability")
+
+releaseDayData = mapToInteger(extractColumn(5))
+valenceData = mapToInteger(extractColumn(18))
+createLineGraph("Release Day for Valence", "Finding the trend for the release Day and the Valence", releaseDayData, valenceData, "Release Day", "Valence")
+
+releaseDayData = mapToInteger(extractColumn(5))
+energyData = mapToInteger(extractColumn(19))
+createLineGraph("Release day for Energy", "Finding the trend for the release day and the Energy", releaseDayData, energyData, "Release Day", "Energy")
 
 # GRAPHICAL USER INTERFACE 
 # GUI function
