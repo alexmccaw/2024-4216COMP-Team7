@@ -60,7 +60,7 @@ def createScatterGraph(title, subtitle, xData, yData, xLabel, yLabel):
 def createBarChart(title, subtitle, xData, yData, xLabel, yLabel):
     plt.title(title)
     plt.suptitle(subtitle)
-    plt.bar(xData, yData)
+    plt.bar(xData,yData)
     plt.xlabel(xLabel)
     plt.ylabel(yLabel)
     plt.show()
@@ -77,6 +77,17 @@ keyData = (extractColumn(15))
 streamsData = mapToInteger(extractColumn(8))
 createBarChart("Graph of Key's Affect on Streams", "Example", keyData, streamsData, "Key", "Streams")
 
+
+# Extracting data for keys and streams
+artistData = extractColumn(2)
+streamsData = mapToInteger(extractColumn(8))
+
+# Sorting the data based on artistData in ascending order
+sorted_data = sorted(zip(artistData, streamsData), key=lambda x: int(x[0]))
+artistData_sorted, streamsData_sorted = zip(*sorted_data)
+
+# Creating a bar chart
+createBarChart("Artists Count's Affect on Streams", "Example", artistData_sorted, streamsData_sorted, "Artist Count", "Streams(million)")
 
 
 # GRAPHICAL USER INTERFACE 
