@@ -84,7 +84,10 @@ def createDualLineGraph(title, subtitle, xData, yData1, yData2, xLabel, yLabel):
     
 keyData = (extractColumn(15))
 streamsData = mapToInteger(extractColumn(8))
-createBarChart("Graph of Key's Affect on Streams", "Example", keyData, streamsData, "Key", "Streams")
+# Zip key and stream data together, sort by keys, then unzip
+sorted_data = sorted(zip(keyData, streamsData), key=lambda x: x[0])
+sorted_keys, sorted_streams = zip(*sorted_data)
+createBarChart("Graph of Key's Affect on Streams", "Example", sorted_keys, sorted_streams, "Key", "Streams")
 
 
 

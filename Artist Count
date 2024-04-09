@@ -42,4 +42,4 @@ artistData = extractColumn(2)
 streamsData = mapToInteger(extractColumn(8))
 
 # Creating a bar chart
-createBarChart("Artists Count's Affect on Streams", "Example", artistData, streamsData, "Artist Count", "Streams")
+createBarChart("Artists Count's Affect on Streams", "Example", artistData, streamsData, "Artist Count", "Streams(million)")
