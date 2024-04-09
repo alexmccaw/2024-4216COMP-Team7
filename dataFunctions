@@ -72,6 +72,27 @@ def createBarChart(title, subtitle, xData, yData, xLabel, yLabel):
 #createLineGraph("Graph of BPM against Streams", "Example", bpmData, streamsData, "BPM", "Streams")
 
 #--- CODE YOUR INDIVIDUAL WORK IN THIS SPACE ---
+
+artistNameData = extractColumn(1)
+spotifyPlaylistData = mapToInteger(extractColumn(6))
+createLineGraph("Artist Name In Spotify Playlists", "Finding the Artists in the Spotify Playlist", artistNameData, spotifyPlaylistData, "Artist Name", "Spotify Playlist")
+
+artistNameData = extractColumn(1)
+spotifyChartsData = mapToInteger(extractColumn(7))
+createLineGraph("Artist Name in Spotify Charts", "Finding the Artists in the Spotify Charts", artistNameData, spotifyChartsData, "Artist Name", "Spotify Charts")
+
+artistNameData = extractColumn(1)
+applePlaylistData = mapToInteger(extractColumn(9))
+createLineGraph("Artist Name in Apple Playlist", "Finding the Artists in the Apple Playlist", artistNameData, applePlaylistData, "Artist Name", "Apple Playlist")
+
+artistNameData = extractColumn(1)
+appleChartsData = mapToInteger(extractColumn(10))
+createLineGraph("Artist Name in Apple Charts", "Finding the Artist in the Apple Charts", artistNameData, appleChartsData, "Artist Name", "Apple Charts")
+
+artistNameData = extractColumn(1)
+shazamChartsData = mapToInteger(extractColumn(13))
+createLineGraph("Artist Name in Shazam Charts", "Finding the Artist in the Shazam Charts", artistNameData, shazamChartsData, "Artist Name", "Shazam Charts")
+
     
 keyData = (extractColumn(15))
 streamsData = mapToInteger(extractColumn(8))
