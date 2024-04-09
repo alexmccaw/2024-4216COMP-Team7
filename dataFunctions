@@ -2,6 +2,7 @@ import pandas as pd
 import csv
 import matplotlib.pyplot as plt
 import tkinter as tk
+from tkinter import font
 
 def extractColumn(columnNumber):       
     # code to read the data
@@ -83,6 +84,27 @@ def createDualLineGraph(title, subtitle, xData, yData1, yData2, xLabel, yLabel1,
 #createLineGraph("Graph of BPM against Streams", "Example", bpmData, streamsData, "BPM", "Streams")
 
 #--- CODE YOUR INDIVIDUAL WORK IN THIS SPACE ---
+
+artistNameData = extractColumn(1)
+spotifyPlaylistData = mapToInteger(extractColumn(6))
+createLineGraph("Artist Name In Spotify Playlists", "Finding the Artists in the Spotify Playlist", artistNameData, spotifyPlaylistData, "Artist Name", "Spotify Playlist")
+
+artistNameData = extractColumn(1)
+spotifyChartsData = mapToInteger(extractColumn(7))
+createLineGraph("Artist Name in Spotify Charts", "Finding the Artists in the Spotify Charts", artistNameData, spotifyChartsData, "Artist Name", "Spotify Charts")
+
+artistNameData = extractColumn(1)
+applePlaylistData = mapToInteger(extractColumn(9))
+createLineGraph("Artist Name in Apple Playlist", "Finding the Artists in the Apple Playlist", artistNameData, applePlaylistData, "Artist Name", "Apple Playlist")
+
+artistNameData = extractColumn(1)
+appleChartsData = mapToInteger(extractColumn(10))
+createLineGraph("Artist Name in Apple Charts", "Finding the Artist in the Apple Charts", artistNameData, appleChartsData, "Artist Name", "Apple Charts")
+
+artistNameData = extractColumn(1)
+shazamChartsData = mapToInteger(extractColumn(13))
+createLineGraph("Artist Name in Shazam Charts", "Finding the Artist in the Shazam Charts", artistNameData, shazamChartsData, "Artist Name", "Shazam Charts")
+
     
 
 streamsData = mapToInteger(extractColumn(8))
@@ -117,14 +139,52 @@ createDualLineGraph("Streams in the Shazam Charts and the Apple Music Playlists"
     
 keyData = (extractColumn(15))
 streamsData = mapToInteger(extractColumn(8))
-createBarChart("Graph of Key's Affect on Streams", "Example", keyData, streamsData, "Key", "Streams")
+# Zip key and stream data together, sort by keys, then unzip
+sorted_data = sorted(zip(keyData, streamsData), key=lambda x: x[0])
+sorted_keys, sorted_streams = zip(*sorted_data)
+createBarChart("Graph of Key's Affect on Streams", "Example", sorted_keys, sorted_streams, "Key", "Streams")
 
 
+releaseYearData = mapToInteger(extractColumn(3))
+danceabilityData = mapToInteger(extractColumn(17))
+createLineGraph("Release Year for Danceability", "Finding the trend for the release year and the danceability", releaseYearData, danceabilityData, "Release Year", "Danceability")
+
+releaseYearData = mapToInteger(extractColumn(3))
+valenceData = mapToInteger(extractColumn(18))
+createLineGraph("Release Year for Valence", "Finding the trend for the release year and the valnce", releaseYearData, valenceData, "Release Year", "Valence")
+
+releaseYearData = mapToInteger(extractColumn(3))
+energyData = mapToInteger(extractColumn(19))
+createLineGraph("Release Year for Energy", "Finding the trend for the release year and the Energy", releaseYearData, energyData, "Release Year", "Energy")
+
+releaseMonthData = mapToInteger(extractColumn(4))
+danceabilityData = mapToInteger(extractColumn(17))
+createLineGraph("Release Month for Danceability", "Finding the trend for the release month and the Danceability", releaseMonthData, danceabilityData, "Release Month", "Danceability")
+
+releaseMonthData = mapToInteger(extractColumn(4))
+valenceData = mapToInteger(extractColumn(18))
+createLineGraph("Release Month for Valence", "Finding the trend for the release month and the Valence", releaseMonthData, valenceData, "Release Month", "Valence")
+
+releaseMonthData = mapToInteger(extractColumn(4))
+energyData = mapToInteger(extractColumn(19))
+createLineGraph("Release Month for Energy", "Finding the trend for the release month and the Energy", releaseMonthData, energyData, "Release Month", "Energy")
+
+releaseDayData = mapToInteger(extractColumn(5))
+danceabilityData = mapToInteger(extractColumn(17))
+createLineGraph("Release Day for Danceability", "Finding the trend for the release day and the Danceability", releaseDayData, danceabilityData, "Release Day", "Danceability")
+
+releaseDayData = mapToInteger(extractColumn(5))
+valenceData = mapToInteger(extractColumn(18))
+createLineGraph("Release Day for Valence", "Finding the trend for the release Day and the Valence", releaseDayData, valenceData, "Release Day", "Valence")
+
+releaseDayData = mapToInteger(extractColumn(5))
+energyData = mapToInteger(extractColumn(19))
+createLineGraph("Release day for Energy", "Finding the trend for the release day and the Energy", releaseDayData, energyData, "Release Day", "Energy")
 
 # GRAPHICAL USER INTERFACE 
 # GUI function
 def button_clicked(option):
-    if option in range(1, 6):
+    if option in range(1, 8):
         if option == 1: # e.g. this is ALEX'S ANALYSIS
             xData = mapToInteger(extractColumn(14))  
             yData = mapToInteger(extractColumn(8))
@@ -133,17 +193,28 @@ def button_clicked(option):
     else:
         label.config(text="Invalid option")
 
+
 # GUI setup
 root = tk.Tk()
 root.title("Graph Menu")
 root.configure(bg="black")
 
-label = tk.Label(root, text= "Select the graph analysis you would like to display: ", fg = 'green', bg = 'black')
-label.pack(pady=10)
+title_font = font.Font(family="Helvetica", size=24, weight="bold")
+title_label = tk.Label(root, text="Spotify Data Analysis", fg="green", bg="black", font=title_font)
+title_label.pack(pady=10)
 
-for i in range(1, 8):
-    button = tk.Button(root, text=f"Option {i}", command=lambda opt=i: button_clicked(opt))
-    button.config(fg = 'green')
+subtitle_font = font.Font(family="Helvetica", size=14)
+subtitle_label = tk.Label(root, text="Select an option to display a graph", fg="green", bg="black", font=subtitle_font)
+subtitle_label.pack(pady=5)
+
+# List of option names
+option_names = ["Graph of BPM against Streams", "Jake", "Liv", "Roma", "Shannon", "Sushil", "Shauna"]
+
+# Labels and buttons for options
+label_font = font.Font(family="Helvetica", size=12)
+for i, option_name in enumerate(option_names, start=1):
+    button = tk.Button(root, text=option_name, command=lambda opt=i: button_clicked(opt), bg="grey", font=label_font)
+    button.config(fg="green")  # Set button text color to green
     button.pack(pady=5)
 
 # Space for an image
@@ -157,7 +228,9 @@ image = tk.PhotoImage(file=image_path)
 canvas.create_image(0, 0, anchor="nw", image=image)
 
 # Exit button
-exit_button = tk.Button(root, text="Exit", command=root.quit)
+exit_button_font = font.Font(family="Helvetica", size=12)
+exit_button = tk.Button(root, text="Exit", command=root.quit, bg = "grey", font = exit_button_font)
+exit_button.config(fg = "green")
 exit_button.pack(pady=5)
 
 root.mainloop()
