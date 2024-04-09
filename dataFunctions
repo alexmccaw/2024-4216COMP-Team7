@@ -39,7 +39,7 @@ def mapToInteger(userList):
             mappedList.append(-1)
     return mappedList
 
-def createLineGraph(title, subtitle, xData, yData, xLabel, yLabel): # code to create a basic graph using user data
+def createLineGraph(title, subtitle, xData, yData, xLabel, yLabel, ): # code to create a basic graph using user data
     fig, ax = plt.subplots()
     fig.suptitle(title)
     ax.set_title(subtitle)
@@ -65,6 +65,15 @@ def createBarChart(title, subtitle, xData, yData, xLabel, yLabel):
     plt.ylabel(yLabel)
     plt.show()
 
+def createDualLineGraph(title, subtitle, xData, yData1, yData2, xLabel, yLabel):
+    fig, ax = plt.subplots()
+    plt.title(title)
+    plt.suptitle(subtitle)
+    ax.plot(sorted(xData), sorted(yData1), 'b', linewidth = '3')
+    ax.plot(sorted(xData), sorted(yData2), 'r', linewidth = '3')
+    plt.xlabel(xLabel)
+    plt.ylabel(yLabel)
+    plt.show()
     
 #Example of how to use functions
 #bpmData = mapToInteger(extractColumn(14))
@@ -76,7 +85,6 @@ def createBarChart(title, subtitle, xData, yData, xLabel, yLabel):
 keyData = (extractColumn(15))
 streamsData = mapToInteger(extractColumn(8))
 createBarChart("Graph of Key's Affect on Streams", "Example", keyData, streamsData, "Key", "Streams")
-
 
 
 # GRAPHICAL USER INTERFACE 
