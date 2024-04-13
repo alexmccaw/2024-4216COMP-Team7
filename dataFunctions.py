@@ -66,7 +66,7 @@ def createBarChart(title, subtitle, xData, yData, xLabel, yLabel):
     plt.ylabel(yLabel)
     plt.show()
 
-def createDualLineGraph(ax, title, subtitle, xData, yData1, yData2, xLabel, yLabel1, yLabel2):
+def createDualLineGraph(title, subtitle, xData, yData1, yData2, xLabel, yLabel1, yLabel2):
     fig, ax = plt.subplots()
     plt.title(title)
     plt.suptitle(subtitle)
@@ -80,16 +80,50 @@ def createDualLineGraph(ax, title, subtitle, xData, yData1, yData2, xLabel, yLab
     
 def displayGraphs():
     # create 3x3 grid of Axes in one Figure
-            fig, axs = plt.subplots(3, 3)
-            axs[0][0].set_title("Plot 1")
-            axs[0][1].set_title("Plot 2")
-            axs[1][0].set_title("Plot 3")
-            axs[1][1].set_title("Plot 4")
-            axs[2][1].set_title("Plot 5")
-            axs[2][2].set_title("Plot 6")
-            plt.tight_layout()
-            return fig, axs
-            #plt.show()
+        fig, axs = plt.subplots(2, 3)
+        axs[0][0].set_title("Plot 1")
+        axs[0][1].set_title("Plot 2")
+        axs[0][2].set_title("Plot 3")  # Fix the index error here
+        axs[1][0].set_title("Plot 4")
+        axs[1][1].set_title("Plot 5")
+        axs[1][2].set_title("Plot 6")
+        plt.tight_layout()
+        return fig, axs
+        #plt.show()
+
+def displayAlexAnalysis():
+    xData = mapToInteger(extractColumn(14))  
+    yData = mapToInteger(extractColumn(8))
+    createLineGraph("Graph of BPM against Streams", "Example", xData, yData, "BPM", "Streams")
+    plt.show()
+
+def displayLivAnalysis():
+    streamsData = mapToInteger(extractColumn(8))
+    spotifyPlaylistData = mapToInteger(extractColumn(6))
+    appleMusicPlaylistData = mapToInteger(extractColumn(9))
+    #createDualLineGraph("Streams in Spotify and Apple Playlists", "The number of streams in spotify and Apple Playlists", streamsData, spotifyPlaylistData, appleMusicPlaylistData, "Streams", "Spotify Playlist", "Apple Music Playlist")
+    fig, axs = plt.subplots(2, 3)
+    axs[0][0].set_title("Streams in Spotify and Apple Playlists")
+    axs[0][0].plot(streamsData, spotifyPlaylistData)
+    axs[0][0].plot(streamsData, appleMusicPlaylistData)
+    axs[0][1].set_title("Plot 2")
+    axs[1][0].set_title("Plot 3")
+    axs[1][1].set_title("Plot 4")
+    axs[0][2].set_title("Plot 5")
+    axs[1][2].set_title("Plot 6")
+    plt.tight_layout()
+    plt.show()
+
+def displayJakeAnalysis():
+    x
+def displayShannonAnalysis():
+    x
+def displayShaunaAnalysis():
+    x
+def displayRomaAnalysis():
+    x
+def displaySushilAnalysis():
+    x
 
 #Example of how to use functions
 #bpmData = mapToInteger(extractColumn(14))
@@ -193,19 +227,24 @@ def displayGraphs():
 #createLineGraph("Release day for Energy", "Finding the trend for the release day and the Energy", releaseDayData, energyData, "Release Day", "Energy")
 
 # GRAPHICAL USER INTERFACE 
-# GUI function
+# GUI menu function is below
 def button_clicked(option):
     if option in range(1, 8):
         if option == 1: # e.g. this is ALEX'S ANALYSIS
-            xData = mapToInteger(extractColumn(14))  
-            yData = mapToInteger(extractColumn(8))
-            createLineGraph("Graph of BPM against Streams", "Example", xData, yData, "BPM", "Streams")
-        if option == 2: # e.g. this is LIV's ANALYSIS
-            figures, axes = displayGraphs()
-            streamsData = mapToInteger(extractColumn(8))
-            spotifyPlaylistData = mapToInteger(extractColumn(6))
-            appleMusicPlaylistData = mapToInteger(extractColumn(9))
-            createDualLineGraph(axes,"Streams in Spotify and Apple Playlists", "The number of streams in spotify and Apple Playlists", streamsData, spotifyPlaylistData, appleMusicPlaylistData, "Streams", "Spotify Playlist", "Apple Music Playlist")
+            displayAlexAnalysis()
+        if option == 2:
+            displayLivAnalysis()
+        if option == 3:
+            displayJakeAnalysis()
+        if option == 4:
+            displayShannonAnalysis()
+        if option == 5:
+            displayShaunaAnalysis()
+        if option == 6:
+            displayRomaAnalysis()
+        if option == 7:
+            displaySushilAnalysis()
+           # figures.canvas.manager.window.move(960, 540)
             plt.show()
             #streamsData = mapToInteger(extractColumn(8))
             #spotifyPlaylistData = mapToInteger(extractColumn(6))
@@ -257,7 +296,7 @@ subtitle_label = tk.Label(root, text="Select an option to display a graph", fg="
 subtitle_label.pack(pady=5)
 
 # List of option names
-option_names = ["Graph of BPM against Streams", "Jake", "Liv", "Roma", "Shannon", "Sushil", "Shauna"]
+option_names = ["Graph of BPM against Streams", "Liv", "Jake", "Shannon", "Shauna", "Roma", "Sushil"]
 
 # Labels and buttons for options
 label_font = font.Font(family="Helvetica", size=12)
