@@ -65,7 +65,7 @@ def createBarChart(title, subtitle, xData, yData, xLabel, yLabel):
     plt.xlabel(xLabel)
     plt.ylabel(yLabel)
     plt.show()
-
+    
 def createDualLineGraph(title, subtitle, xData, yData1, yData2, xLabel, yLabel1, yLabel2):
     fig, ax = plt.subplots()
     plt.title(title)
@@ -77,21 +77,47 @@ def createDualLineGraph(title, subtitle, xData, yData1, yData2, xLabel, yLabel1,
     ax1.set_ylabel(yLabel2, color = 'r')
     plt.xlabel(xLabel)
     plt.show()
+    
+    
+def createBarChartOnSubplot(ax, title, xData, yData, xLabel, yLabel):
+    ax.set_title(title, fontsize = 8)
+    ax.bar(xData, yData, color='b', alpha=0.7)
+    ax.set_xlabel(xLabel)
+    ax.set_ylabel(yLabel)
 
-def createDualLineGraphOnSubplot(ax, title, xData, yData1, yData2, xLabel, yLabel1, yLabel2):
-    ax.set_title(title)
-    ax.plot(sorted(xData), sorted(yData1), 'b', linewidth = '1')
+    ax.set_xticks(range(len(xData)))
+    ax.set_xticklabels(xData, rotation=45)
+    
+def createDualLineGraphOnSubplot(ax, title, xData, yData1, yData2, xLabel, yLabel1, yLabel2, sameYAxis):
+    ax.set_title(title, fontsize = 8)
+    ax.plot(sorted(xData), sorted(yData1), 'b', linewidth = '2')
     ax.set_ylabel(yLabel1, color = 'b')
+    
+    if sameYAxis:
+        max_y = max(max(yData1), max(yData2))
+        min_y = min(min(yData1), min(yData2))
+        ax.set_ylim(min_y, max_y)
+        
     ax1=ax.twinx()
-    ax1.plot(sorted(xData), sorted(yData2), 'r', linewidth = '1')
+    ax1.plot(sorted(xData), sorted(yData2), 'r', linewidth = '2')
     ax1.set_ylabel(yLabel2, color = 'r')
     ax.set_xlabel(xLabel)
+    
+    if sameYAxis:
+        ax1.set_ylim(min_y, max_y)
 
 def createLineGraphOnSubplot(ax, title, xData, yData, xLabel, yLabel):
-    ax.set_title(title)
+    ax.set_title(title, fontsize = 8)
     ax.plot(sorted(xData), sorted(yData), 'b', linewidth = '2')
     ax.set_ylabel(yLabel, color = 'b')
     ax.set_xlabel(xLabel)
+    
+def createScatterGraphOnSubplot(ax, title, xData, yData, xLabel, yLabel):
+    ax.set_title(title, fontsize = 8)
+    ax.scatter(xData, yData, color='b', alpha=0.7, s=1)
+    ax.set_xlabel(xLabel)
+    ax.set_ylabel(yLabel)
+
 
 #Example of how to use functions
 #bpmData = mapToInteger(extractColumn(14))
@@ -104,16 +130,28 @@ def displayAlexAnalysis():
     streamsData = mapToInteger(extractColumn(8))
     spotifyChartsData = mapToInteger(extractColumn(7))
     appleMusicChartsData = mapToInteger(extractColumn(10))
+    acousticnessData = mapToInteger(extractColumn(20))
+    instrumentalnessData = mapToInteger(extractColumn(21))
+    livenessData = mapToInteger(extractColumn(22))
+    speechinessData = mapToInteger(extractColumn(23))
     
-    
-    #Plotting of figure with multiple axes, in this case, 3x1 so 3 graphs can be shown
-    fig, axs = plt.subplots(1, 2)
+    #Plotting of figures with multiple axes, in this case, 2x1 so 2 graphs can be shown
+    fig, axs = plt.subplots(1, 4)
 
     #Plotting individual graphs: 
     createLineGraphOnSubplot(axs[0], "Graph of BPM against Streams", bpmData, streamsData, "BPM", "Streams")
+    
     createDualLineGraphOnSubplot(axs[1], "Graph of BPM against Chart Data", bpmData, spotifyChartsData,
-                                 appleMusicChartsData, "BPM", "In Spotify Charts", "In Apple Music Charts")
-    createLineGraphOnSubplot(axs[2], "Graph of BPM against Streams", bpmData, streamsData, "BPM", "Streams")
+                                 appleMusicChartsData, "BPM", "In Spotify Charts", "In Apple Music Charts", False)
+    
+    createDualLineGraphOnSubplot(axs[2], "Graph of Streams against Acousticness and Speechiness", 
+                                 streamsData, acousticnessData, speechinessData, "Streams", 
+                                 "Acousticness (%)", "Speechiness(%)", True)
+    
+    createLineGraphOnSubplot(axs[3], "Graph of Instrumentalness against Liveness", instrumentalnessData, 
+                                livenessData, "Instrumentalness (%)", "Liveness (%)")
+    
+    plt.subplots_adjust(wspace=0.15)
     plt.tight_layout()
     plt.show()
 
@@ -133,23 +171,27 @@ def displayLivAnalysis():
 
     createDualLineGraphOnSubplot(axs[0][0], "Streams in Spotify and Apple Playlists", streamsData, 
                                  spotifyPlaylistData, appleMusicPlaylistData,
-                                 "Streams", "Spotify", "Apple")
+                                 "Streams", "Spotify", "Apple", False)
 
     createDualLineGraphOnSubplot(axs[0][1],"Streams in Spotify Playlists and Shazam Charts", streamsData, 
                                  spotifyPlaylistData, shazamChartsData, "Streams", "Spotify Playlist", 
-                                 "Shazam Charts")
+                                 "Shazam Charts", False)
 
     createDualLineGraphOnSubplot(axs[0][2], "Streams in Spotify Charts and Shazam Charts",  
-                                 streamsData, spotifyChartsData, shazamChartsData, "Streams", "Spotify Charts", "Shazam Charts")
+                                 streamsData, spotifyChartsData, shazamChartsData, "Streams",
+                                 "Spotify Charts", "Shazam Charts", False)
 
     createDualLineGraphOnSubplot(axs[1][0],"Streams in Apple Playlists and the Spotify Charts", streamsData,
-                          appleMusicChartsData, spotifyChartsData, "Streams", "Apple Music Charts", "Spotify Charts")
+                          appleMusicChartsData, spotifyChartsData, "Streams", "Apple Music Charts",
+                          "Spotify Charts", False)
 
     createDualLineGraphOnSubplot(axs[1][1], "Streams in the Shazam Charts and Apple Music Charts", 
-                                 streamsData, shazamChartsData, appleMusicChartsData, "Streams", "Shazam Charts", "Apple Music Charts")
+                                 streamsData, shazamChartsData, appleMusicChartsData,
+                                 "Streams", "Shazam Charts", "Apple Music Charts", False)
 
     createDualLineGraphOnSubplot(axs[1][2], "Streams in the Shazam Charts and the Apple Music Playlists", 
-                                 streamsData, shazamChartsData, appleMusicPlaylistData, "Streams", "Shazam Charts", "Apple Music Playlist")
+                                 streamsData, shazamChartsData, appleMusicPlaylistData,
+                                 "Streams", "Shazam Charts", "Apple Music Playlist", False)
 
     plt.tight_layout()
     plt.show()
