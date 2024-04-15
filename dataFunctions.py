@@ -218,7 +218,13 @@ def displayRomaAnalysis():
                    keyData, sorted(streamsData), "Key", "Streams")
 
 def displaySushilAnalysis():
-    x
+    
+    # Extracting data for keys and streams
+    artistData = mapToInteger(extractColumn(18))
+    streamsData = mapToInteger(extractColumn(8))
+
+    # Creating a bar chart
+    createBarChart("Artists Count's Affect on Streams", "Example", artistData, streamsData, "Danceability(%)", "Streams(million)")
 
 
 #--- CODE YOUR INDIVIDUAL WORK IN THIS SPACE ---
