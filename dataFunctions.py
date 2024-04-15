@@ -209,6 +209,21 @@ def displayShaunaAnalysis():
     createLineGraphOnSubplot(axs[4], "Artist Name in Shazam Charts", artistNameData, shazamChartsData, "Artist Name", "Shazam Charts")
     plt.tight_layout()
     plt.show()
+    
+    #SHAUNA
+    # Group by artist(s)_name and count the number of entries in Spotify charts
+    artist_spotify_chart_entries = df.groupby('artist(s)_name').size().sort_values(ascending=False).head(50)
+
+    # Create a horizontal bar plot for the top 50 artist(s) based on the number of entries in Spotify charts
+    plt.figure(figsize=(10, 12))
+    artist_spotify_chart_entries.plot(kind='barh', color='skyblue')
+    plt.title('Top 50 Artist(s) Entries in Spotify Charts')
+    plt.xlabel('Number of Entries in Spotify Charts')
+    plt.ylabel('Artist(s)')
+    plt.tight_layout()
+    plt.show()
+
+    
 
 def displayRomaAnalysis():
     keyData = (extractColumn(15))
