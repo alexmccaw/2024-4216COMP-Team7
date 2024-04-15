@@ -58,9 +58,8 @@ def createScatterGraph(title, subtitle, xData, yData, xLabel, yLabel):
     plt.ylabel(yLabel)
     plt.show()
 
-def createBarChart(title, subtitle, xData, yData, xLabel, yLabel):
+def createBarChart(title, xData, yData, xLabel, yLabel):
     plt.title(title)
-    plt.suptitle(subtitle)
     plt.bar(xData,yData)
     plt.xlabel(xLabel)
     plt.ylabel(yLabel)
@@ -160,7 +159,7 @@ def displayJakeAnalysis():
     streamsData = mapToInteger(extractColumn(8))
 
     # Creating a bar chart
-    createBarChart("Artists Count's Affect on Streams", "Example", artistCountData,
+    createBarChart("Artists Count's Affect on Streams", artistCountData,
                    streamsData, "Artist Count", "Streams(million)")
 
 def displayShannonAnalysis():
@@ -190,28 +189,29 @@ def displayShannonAnalysis():
     plt.show()
 
 def displayShaunaAnalysis():
-    artistNameData = extractColumn(1)
-    spotifyPlaylistData = mapToInteger(extractColumn(6))
-    spotifyChartsData = mapToInteger(extractColumn(7))
-    applePlaylistData = mapToInteger(extractColumn(9))
-    appleChartsData = mapToInteger(extractColumn(10))
-    shazamChartsData = mapToInteger(extractColumn(13))
+    #artistNameData = extractColumn(1)
+    #spotifyPlaylistData = mapToInteger(extractColumn(6))
+    #spotifyChartsData = mapToInteger(extractColumn(7))
+    #applePlaylistData = mapToInteger(extractColumn(9))
+    #appleChartsData = mapToInteger(extractColumn(10))
+    #shazamChartsData = mapToInteger(extractColumn(13))
 
     #Plotting of figure with multiple axes, in this case, 1x5 so 5 graphs can be shown
-    fig, axs = plt.subplots(1,5)
+    #fig, axs = plt.subplots(1,5)
 
     #Plotting individual graphs: 
 
-    createLineGraphOnSubplot(axs[0],"Artist Name In Spotify Playlists", artistNameData, spotifyPlaylistData, "Artist Name", "Spotify Playlist")
-    createLineGraphOnSubplot(axs[1], "Artist Name in Spotify Charts", artistNameData, spotifyChartsData, "Artist Name", "Spotify Charts")
-    createLineGraphOnSubplot(axs[2], "Artist Name in Apple Playlist", artistNameData, applePlaylistData, "Artist Name", "Apple Playlist")
-    createLineGraphOnSubplot(axs[3], "Artist Name in Apple Charts", artistNameData, appleChartsData, "Artist Name", "Apple Charts")
-    createLineGraphOnSubplot(axs[4], "Artist Name in Shazam Charts", artistNameData, shazamChartsData, "Artist Name", "Shazam Charts")
-    plt.tight_layout()
-    plt.show()
+    #createLineGraphOnSubplot(axs[0],"Artist Name In Spotify Playlists", artistNameData, spotifyPlaylistData, "Artist Name", "Spotify Playlist")
+    #createLineGraphOnSubplot(axs[1], "Artist Name in Spotify Charts", artistNameData, spotifyChartsData, "Artist Name", "Spotify Charts")
+    #createLineGraphOnSubplot(axs[2], "Artist Name in Apple Playlist", artistNameData, applePlaylistData, "Artist Name", "Apple Playlist")
+    #createLineGraphOnSubplot(axs[3], "Artist Name in Apple Charts", artistNameData, appleChartsData, "Artist Name", "Apple Charts")
+    #createLineGraphOnSubplot(axs[4], "Artist Name in Shazam Charts", artistNameData, shazamChartsData, "Artist Name", "Shazam Charts")
+    #plt.tight_layout()
+    #plt.show()
     
     #SHAUNA
     # Group by artist(s)_name and count the number of entries in Spotify charts
+    df = pd.read_csv('spotify-2023.csv')
     artist_spotify_chart_entries = df.groupby('artist(s)_name').size().sort_values(ascending=False).head(50)
 
     # Create a horizontal bar plot for the top 50 artist(s) based on the number of entries in Spotify charts
@@ -259,10 +259,13 @@ def displayRomaAnalysis():
 
     createBarChart("Graph of Key's Effect on Streams", keyData, streamsData, "Key", "Streams")
     createBarChart("Graph of Mode's Effect on Streams", modeData, streamsData, "Mode", "Streams" )
-    createDualLineGraphOnSubplot("Graph of Key and Mode's Effect on Apple Charts", keyData, modeData, appleMusicChartsData, "Key", "Mode", "Apple Music Charts")
-    createDualLineGraphOnSubplot("Graph of Key and Mode's Effect on Shazam Charts", keyData, modeData, shazamChartsData, "Key", "Mode", "Shazam Charts")
-    createDualLineGraphOnSubplot("Graph of Key and Mode's Effect on Spotify Charts", keyData, modeData, spotifyChartsData, "Key", "Mode", "Spotify Charts")
-
+    
+    fig, ax = plt.subplots(1, 3, figsize=(20, 5))
+    createDualLineGraphOnSubplot(ax[0], "Graph of Key and Mode's Effect on Apple Charts", keyData, modeData, appleMusicChartsData, "Key", "Mode", "Apple Music Charts")
+    createDualLineGraphOnSubplot(ax[1], "Graph of Key and Mode's Effect on Shazam Charts", keyData, modeData, shazamChartsData, "Key", "Mode", "Shazam Charts")
+    createDualLineGraphOnSubplot(ax[2], "Graph of Key and Mode's Effect on Spotify Charts", keyData, modeData, spotifyChartsData, "Key", "Mode", "Spotify Charts")
+    plt.tight_layout()
+    plt.show()
 
 def displaySushilAnalysis():
     
@@ -271,19 +274,19 @@ def displaySushilAnalysis():
     streamsData = mapToInteger(extractColumn(8))
 
     # Creating a bar chart
-    createBarChart("Danceability Affect on Streams", "Example", artistData, streamsData, "Danceability(%)", "Streams(million)")
+    createBarChart("Danceability Affect on Streams", artistData, streamsData, "Danceability(%)", "Streams(million)")
 
      # Extracting data for keys and streams
     valenceData = mapToInteger(extractColumn(18))
     streamsData = mapToInteger(extractColumn(8))
 
     # Creating a bar chart
-    createBarChart("Valence Affect on Streams", "Example", valenceData, streamsData, "valence(%)", "Streams(million)") # Extracting data for keys and streams
+    createBarChart("Valence Affect on Streams", valenceData, streamsData, "valence(%)", "Streams(million)") # Extracting data for keys and streams
     energyData = mapToInteger(extractColumn(19))
     streamsData = mapToInteger(extractColumn(8))
 
     # Creating a bar chart
-    createBarChart("Energy Affect on Streams", "Example", energyData, streamsData, "Energy(%)", "Streams(million)")
+    createBarChart("Energy Affect on Streams", energyData, streamsData, "Energy(%)", "Streams(million)")
 
 #--- CODE YOUR INDIVIDUAL WORK IN THIS SPACE ---
 
@@ -305,8 +308,6 @@ def button_clicked(option):
             displayRomaAnalysis()
         if option == 7:
             displaySushilAnalysis()
-           # figures.canvas.manager.window.move(960, 540)
-            plt.show()
 
 # GUI setup
 root = tk.Tk()
