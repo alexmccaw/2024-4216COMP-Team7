@@ -213,9 +213,18 @@ def displayShaunaAnalysis():
 def displayRomaAnalysis():
     keyData = (extractColumn(15))
     streamsData = mapToInteger(extractColumn(8))
+    modeData = (extractColumn(16))
+    appleMusicChartsData = mapToInteger(extractColumn(10))
+    shazamChartsData = mapToInteger(extractColumn(13))
+    spotifyChartsData = mapToInteger(extractColumn(7))
 
-    createBarChart("Graph of Key's Effect on Streams", "How does Key affect popularity of a song?",
-                   keyData, sorted(streamsData), "Key", "Streams")
+
+    createBarChart("Graph of Key's Effect on Streams", keyData, streamsData, "Key", "Streams")
+    createBarChart("Graph of Mode's Effect on Streams", modeData, streamsData, "Mode", "Streams" )
+    createDualLineGraphOnSubplot("Graph of Key and Mode's Effect on Apple Charts", keyData, modeData, appleMusicChartsData, "Key", "Mode", "Apple Music Charts")
+    createDualLineGraphOnSubplot("Graph of Key and Mode's Effect on Shazam Charts", keyData, modeData, shazamChartsData, "Key", "Mode", "Shazam Charts")
+    createDualLineGraphOnSubplot("Graph of Key and Mode's Effect on Spotify Charts", keyData, modeData, spotifyChartsData, "Key", "Mode", "Spotify Charts")
+
 
 def displaySushilAnalysis():
     x
