@@ -113,7 +113,7 @@ def displayAlexAnalysis():
     createLineGraphOnSubplot(axs[0], "Graph of BPM against Streams", bpmData, streamsData, "BPM", "Streams")
     createDualLineGraphOnSubplot(axs[1], "Graph of BPM against Chart Data", bpmData, spotifyChartsData,
                                  appleMusicChartsData, "BPM", "In Spotify Charts", "In Apple Music Charts")
-    createLineGraphOnSubplot(axs[2], "Graph of BPM against Streams", bpmData, streamsData, "BPM", "Streams")
+    #createLineGraphOnSubplot(axs[2], "Graph of BPM against Streams", bpmData, streamsData, "BPM", "Streams")
     plt.tight_layout()
     plt.show()
 
@@ -260,79 +260,42 @@ def button_clicked(option):
             displaySushilAnalysis()
            # figures.canvas.manager.window.move(960, 540)
             plt.show()
-            #streamsData = mapToInteger(extractColumn(8))
-            #spotifyPlaylistData = mapToInteger(extractColumn(6))
-            #appleMusicPlaylistData = mapToInteger(extractColumn(9))
-            #createDualLineGraph("Streams in Spotify and Apple Playlists", "The number of streams in spotify and Apple Playlists", streamsData, spotifyPlaylistData, appleMusicPlaylistData, "Streams", "Spotify Playlist", "Apple Music Playlist")
-
-            #streamsData = mapToInteger(extractColumn(8))
-            #spotifyPlaylistData = mapToInteger(extractColumn(6))
-            #shazamChartsData = mapToInteger(extractColumn(13))
-            #createDualLineGraph("Streams in Spotify Playlists and Shazam Charts", "The number of streams in Spotify Playlists and the Shazam Charts", streamsData, spotifyPlaylistData, shazamChartsData, "Streams", "Spotify Playlist", "Shazam Charts")
-
-            #streamsData = mapToInteger(extractColumn(8))
-            #spotifyChartsData = mapToInteger(extractColumn(7))
-            #shazamChartsData = mapToInteger(extractColumn(13))
-            #createDualLineGraph("Streams in Spotify Charts and Shazam Charts", "The number of streams in Spotify Charts and the Shazam Charts", streamsData, spotifyChartsData, shazamChartsData, "Streams", "Spotify Charts", "Shazam Charts")
-
-            #streamsData = mapToInteger(extractColumn(8))
-            #appleMusicChartsData = mapToInteger(extractColumn(10))
-            #spotifyChartsData = mapToInteger(extractColumn(7))
-            #createDualLineGraph("Streams in Apple Playlists and the Spotify Charts", "The number of streams in Apple Music Playlists and the Spotify Charts", streamsData, appleMusicChartsData, spotifyChartsData, "Streams", "Apple Music Charts", "Spotify Charts")
-
-            #streamsData = mapToInteger(extractColumn(8))
-            #shazamChartsData = mapToInteger(extractColumn(13))
-            #appleMusicChartsData = mapToInteger(extractColumn(10))
-            #createDualLineGraph("Streams in the Shazam Charts and Apple Music Charts", "The number of streams in Shazam Charts and the Apple Music Charts", streamsData, shazamChartsData, appleMusicChartsData, "Streams", "Shazam Charts", "Apple Music Charts")
-
-            #streamsData = mapToInteger(extractColumn(8))
-            #shazamChartsData = mapToInteger(extractColumn(13))
-            #appleMusicPlaylistData = mapToInteger(extractColumn(9))
-            #createDualLineGraph("Streams in the Shazam Charts and the Apple Music Playlists", "The number of streams in Shazam Charts and the Apple Music Playlists", streamsData, shazamChartsData, appleMusicPlaylistData, "Streams", "Shazam Charts", "Apple Music Playlist")
-    
-
-            
-    else:
-        label.config(text="Invalid option")
-
 
 # GUI setup
 root = tk.Tk()
 root.title("Graph Menu")
-root.configure(bg="black")
+root.configure(bg="green")
 
 title_font = font.Font(family="Helvetica", size=24, weight="bold")
-title_label = tk.Label(root, text="Spotify Data Analysis", fg="green", bg="black", font=title_font)
+title_label = tk.Label(root, text="Spotify Data Analysis", fg="black", bg="green", font=title_font)
 title_label.pack(pady=10)
 
 subtitle_font = font.Font(family="Helvetica", size=14)
-subtitle_label = tk.Label(root, text="Select an option to display a graph", fg="green", bg="black", font=subtitle_font)
+subtitle_label = tk.Label(root, text="Select an option to display analysis: ", fg="black", bg="green", font=subtitle_font)
 subtitle_label.pack(pady=5)
 
+
 # List of option names
-option_names = ["Graph of BPM against Streams", "Liv", "Jake", "Shannon", "Shauna", "Roma", "Sushil"]
+option_names = ["Analysis of BPM against and Chart Data", "Analysis of Streams across different Charts", 
+                "Analysis of Artist Count's affect on Streams", "Analysis of how Release Dates affect Streams",
+                "Analysis of how specific Artists affect popularity across Playlists and Charts",
+                "Analysis of how the Key affects how streamed songs are", 
+                "Analysis of how Danceability, Valence and Energy affect total streams"]
 
 # Labels and buttons for options
 label_font = font.Font(family="Helvetica", size=12)
 for i, option_name in enumerate(option_names, start=1):
-    button = tk.Button(root, text=option_name, command=lambda opt=i: button_clicked(opt), bg="grey", font=label_font)
-    button.config(fg="green")  # Set button text color to green
+    button = tk.Button(root, text=option_name, command=lambda opt=i: button_clicked(opt),
+                       bg="grey", font=label_font, width = '70', height = '2')
+    button.config(fg="black")  # Set button text color to green
     button.pack(pady=5)
-
-# Space for an image
-canvas = tk.Canvas(root, width=300, height=200)
-canvas.config(bg = 'black')
-canvas.pack(pady=10)
-
-# Load and display the image
-image_path = "img/Spotify.png" 
-image = tk.PhotoImage(file=image_path)
-canvas.create_image(0, 0, anchor="nw", image=image)
 
 # Exit button
 exit_button_font = font.Font(family="Helvetica", size=12)
-exit_button = tk.Button(root, text="Exit", command=root.quit, bg = "grey", font = exit_button_font)
+exit_button = tk.Button(root, text="Exit Program"
+                        , command=root.quit, bg = "grey", font = exit_button_font, width = '20')
 exit_button.config(fg = "green")
 exit_button.pack(pady=5)
 
+root.attributes('-fullscreen', True)
 root.mainloop()
