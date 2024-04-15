@@ -193,7 +193,8 @@ def displayShannonAnalysis():
     plt.tight_layout()
     plt.show()
 
-def displayShaunaAnalysis():  
+def displayShaunaAnalysis():
+    
     #SHAUNA
     # Group by artist(s)_name and count the number of entries in Spotify charts
     df = pd.read_csv('spotify-2023.csv')
@@ -247,9 +248,9 @@ def displayRomaAnalysis():
     plt.show()
 
     fig, ax = plt.subplots(1, 3, figsize=(20, 5))
-    createDualLineGraphOnSubplot(ax[0], "Graph of Key and Mode's Effect on Apple Charts", keyData, modeData, appleMusicChartsData, "Key", "Mode", "Apple Music Charts")
-    createDualLineGraphOnSubplot(ax[1], "Graph of Key and Mode's Effect on Shazam Charts", keyData, modeData, shazamChartsData, "Key", "Mode", "Shazam Charts")
-    createDualLineGraphOnSubplot(ax[2], "Graph of Key and Mode's Effect on Spotify Charts", keyData, modeData, spotifyChartsData, "Key", "Mode", "Spotify Charts")
+    createLineGraphOnSubplot(ax[0], "Graph of Key's Effect on Apple Music Charts", keyData, appleMusicChartsData, "Key", "Apple Music Charts")
+    createLineGraphOnSubplot(ax[1],"Graph of Key's Effect on Shazam Charts", keyData, shazamChartsData, "Key", "Shazam Charts")
+    createLineGraphOnSubplot(ax[2],"Graph of Key's Effect on Spotify Charts", keyData, spotifyChartsData, "Key", "Spotify Charts")
     plt.tight_layout()
     plt.show()
 
@@ -313,7 +314,7 @@ subtitle_label.pack(pady=5)
 option_names = ["Analysis of BPM against and Chart Data", "Analysis of Streams across different Charts", 
                 "Analysis of Artist Count's affect on Streams", "Analysis of how Release Dates affect Streams",
                 "Analysis of how specific Artists affect popularity across Playlists and Charts",
-                "Analysis of how the Key affects how streamed songs are", 
+                "Analysis of how the Key and Mode affects the Popularity of Songs", 
                 "Analysis of how Danceability, Valence and Energy affect total streams"]
 
 # Labels and buttons for options
