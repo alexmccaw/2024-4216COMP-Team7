@@ -49,7 +49,6 @@ def createLineGraph(title, subtitle, xData, yData, xLabel, yLabel, ): # code to 
     ax.plot(sorted(xData), sorted(yData))
     plt.show()
 
-
 def createScatterGraph(title, subtitle, xData, yData, xLabel, yLabel):
     plt.title(title)
     plt.suptitle(subtitle)
@@ -90,6 +89,12 @@ def createLineGraphOnSubplot(ax, title, xData, yData, xLabel, yLabel):
     ax.set_title(title)
     ax.plot(sorted(xData), sorted(yData), 'b', linewidth = '2')
     ax.set_ylabel(yLabel, color = 'b')
+    ax.set_xlabel(xLabel)
+
+def createBarGraphOnSubplot(ax, title, xData, yData, xLabel, yLabel):
+    ax.set_title(title)
+    ax.bar(xData, yData)
+    ax.set_ylabel(yLabel)
     ax.set_xlabel(xLabel)
 
 #Example of how to use functions
@@ -188,27 +193,7 @@ def displayShannonAnalysis():
     plt.tight_layout()
     plt.show()
 
-def displayShaunaAnalysis():
-    #artistNameData = extractColumn(1)
-    #spotifyPlaylistData = mapToInteger(extractColumn(6))
-    #spotifyChartsData = mapToInteger(extractColumn(7))
-    #applePlaylistData = mapToInteger(extractColumn(9))
-    #appleChartsData = mapToInteger(extractColumn(10))
-    #shazamChartsData = mapToInteger(extractColumn(13))
-
-    #Plotting of figure with multiple axes, in this case, 1x5 so 5 graphs can be shown
-    #fig, axs = plt.subplots(1,5)
-
-    #Plotting individual graphs: 
-
-    #createLineGraphOnSubplot(axs[0],"Artist Name In Spotify Playlists", artistNameData, spotifyPlaylistData, "Artist Name", "Spotify Playlist")
-    #createLineGraphOnSubplot(axs[1], "Artist Name in Spotify Charts", artistNameData, spotifyChartsData, "Artist Name", "Spotify Charts")
-    #createLineGraphOnSubplot(axs[2], "Artist Name in Apple Playlist", artistNameData, applePlaylistData, "Artist Name", "Apple Playlist")
-    #createLineGraphOnSubplot(axs[3], "Artist Name in Apple Charts", artistNameData, appleChartsData, "Artist Name", "Apple Charts")
-    #createLineGraphOnSubplot(axs[4], "Artist Name in Shazam Charts", artistNameData, shazamChartsData, "Artist Name", "Shazam Charts")
-    #plt.tight_layout()
-    #plt.show()
-    
+def displayShaunaAnalysis():  
     #SHAUNA
     # Group by artist(s)_name and count the number of entries in Spotify charts
     df = pd.read_csv('spotify-2023.csv')
@@ -247,7 +232,6 @@ def displayShaunaAnalysis():
     plt.tight_layout()
     plt.show()
 
-
 def displayRomaAnalysis():
     keyData = (extractColumn(15))
     streamsData = mapToInteger(extractColumn(8))
@@ -256,10 +240,12 @@ def displayRomaAnalysis():
     shazamChartsData = mapToInteger(extractColumn(13))
     spotifyChartsData = mapToInteger(extractColumn(7))
 
+    fig, ax = plt.subplots(1, 2, figsize=(20, 5))
+    createBarGraphOnSubplot(ax[0],"Graph of Key's Effect on Streams", keyData, streamsData, "Key", "Streams")
+    createBarGraphOnSubplot(ax[1],"Graph of Mode's Effect on Streams", modeData, streamsData, "Mode", "Streams")
+    plt.tight_layout()
+    plt.show()
 
-    createBarChart("Graph of Key's Effect on Streams", keyData, streamsData, "Key", "Streams")
-    createBarChart("Graph of Mode's Effect on Streams", modeData, streamsData, "Mode", "Streams" )
-    
     fig, ax = plt.subplots(1, 3, figsize=(20, 5))
     createDualLineGraphOnSubplot(ax[0], "Graph of Key and Mode's Effect on Apple Charts", keyData, modeData, appleMusicChartsData, "Key", "Mode", "Apple Music Charts")
     createDualLineGraphOnSubplot(ax[1], "Graph of Key and Mode's Effect on Shazam Charts", keyData, modeData, shazamChartsData, "Key", "Mode", "Shazam Charts")
