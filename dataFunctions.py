@@ -327,7 +327,7 @@ subtitle_label.pack(pady=5)
 option_names = ["Analysis of BPM against and Chart Data", "Analysis of Streams across different Charts", 
                 "Analysis of Artist Count's affect on Streams", "Analysis of how Release Dates affect Streams",
                 "Analysis of how specific Artists affect popularity across Playlists and Charts",
-                "Analysis of how the Key affects how streamed songs are", 
+                "Analysis of how the Key and Mode affects the Popularity of Songs", 
                 "Analysis of how Danceability, Valence and Energy affect total streams"]
 
 # Labels and buttons for options
