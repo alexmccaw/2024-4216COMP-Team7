@@ -189,25 +189,6 @@ def displayShannonAnalysis():
     plt.show()
 
 def displayShaunaAnalysis():
-    #artistNameData = extractColumn(1)
-    #spotifyPlaylistData = mapToInteger(extractColumn(6))
-    #spotifyChartsData = mapToInteger(extractColumn(7))
-    #applePlaylistData = mapToInteger(extractColumn(9))
-    #appleChartsData = mapToInteger(extractColumn(10))
-    #shazamChartsData = mapToInteger(extractColumn(13))
-
-    #Plotting of figure with multiple axes, in this case, 1x5 so 5 graphs can be shown
-    #fig, axs = plt.subplots(1,5)
-
-    #Plotting individual graphs: 
-
-    #createLineGraphOnSubplot(axs[0],"Artist Name In Spotify Playlists", artistNameData, spotifyPlaylistData, "Artist Name", "Spotify Playlist")
-    #createLineGraphOnSubplot(axs[1], "Artist Name in Spotify Charts", artistNameData, spotifyChartsData, "Artist Name", "Spotify Charts")
-    #createLineGraphOnSubplot(axs[2], "Artist Name in Apple Playlist", artistNameData, applePlaylistData, "Artist Name", "Apple Playlist")
-    #createLineGraphOnSubplot(axs[3], "Artist Name in Apple Charts", artistNameData, appleChartsData, "Artist Name", "Apple Charts")
-    #createLineGraphOnSubplot(axs[4], "Artist Name in Shazam Charts", artistNameData, shazamChartsData, "Artist Name", "Shazam Charts")
-    #plt.tight_layout()
-    #plt.show()
     
     #SHAUNA
     # Group by artist(s)_name and count the number of entries in Spotify charts
