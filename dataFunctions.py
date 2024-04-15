@@ -177,14 +177,14 @@ def displayShannonAnalysis():
     #Plotting individual graphs: 
 
     createLineGraphOnSubplot(axs[0][0], "Release Year for Danceability", releaseYearData, danceabilityData, "Release Year", "Danceability")
-    createLineGraphOnSubplot(axs[1][0], "Release Month for Danceability", releaseMonthData, danceabilityData, "Release Year", "Danceability")
-    createLineGraphOnSubplot(axs[2][0], "Release Day for Danceability", releaseDayData, danceabilityData, "Release Year", "Danceability")
+    createLineGraphOnSubplot(axs[1][0], "Release Month for Danceability", releaseMonthData, danceabilityData, "Release Month", "Danceability")
+    createLineGraphOnSubplot(axs[2][0], "Release Day for Danceability", releaseDayData, danceabilityData, "Release Day", "Danceability")
     createLineGraphOnSubplot(axs[0][1], "Release Year for Valence", releaseYearData, valenceData, "Release Year", "Valence")
-    createLineGraphOnSubplot(axs[1][1], "Release Month for Valence", releaseMonthData, valenceData, "Release Year", "Valence")
-    createLineGraphOnSubplot(axs[2][1], "Release Day for Valence", releaseDayData, valenceData, "Release Year", "Valence")
+    createLineGraphOnSubplot(axs[1][1], "Release Month for Valence", releaseMonthData, valenceData, "Release Month", "Valence")
+    createLineGraphOnSubplot(axs[2][1], "Release Day for Valence", releaseDayData, valenceData, "Release Day", "Valence")
     createLineGraphOnSubplot(axs[0][2], "Release Year for Energy", releaseYearData, energyData, "Release Year", "Energy")
-    createLineGraphOnSubplot(axs[1][2], "Release Month for Energy", releaseMonthData, energyData, "Release Year", "Energy")
-    createLineGraphOnSubplot(axs[2][2], "Release Day for Energy", releaseDayData, energyData, "Release Year", "Energy")
+    createLineGraphOnSubplot(axs[1][2], "Release Month for Energy", releaseMonthData, energyData, "Release Month", "Energy")
+    createLineGraphOnSubplot(axs[2][2], "Release Day for Energy", releaseDayData, energyData, "Release Day", "Energy")
 
     plt.tight_layout()
     plt.show()
@@ -209,6 +209,21 @@ def displayShaunaAnalysis():
     createLineGraphOnSubplot(axs[4], "Artist Name in Shazam Charts", artistNameData, shazamChartsData, "Artist Name", "Shazam Charts")
     plt.tight_layout()
     plt.show()
+    
+    #SHAUNA
+    # Group by artist(s)_name and count the number of entries in Spotify charts
+    artist_spotify_chart_entries = df.groupby('artist(s)_name').size().sort_values(ascending=False).head(50)
+
+    # Create a horizontal bar plot for the top 50 artist(s) based on the number of entries in Spotify charts
+    plt.figure(figsize=(10, 12))
+    artist_spotify_chart_entries.plot(kind='barh', color='skyblue')
+    plt.title('Top 50 Artist(s) Entries in Spotify Charts')
+    plt.xlabel('Number of Entries in Spotify Charts')
+    plt.ylabel('Artist(s)')
+    plt.tight_layout()
+    plt.show()
+
+    
 
 def displayRomaAnalysis():
     keyData = (extractColumn(15))
@@ -227,8 +242,25 @@ def displayRomaAnalysis():
 
 
 def displaySushilAnalysis():
-    x
+    
+    # Extracting data for keys and streams
+    artistData = mapToInteger(extractColumn(17))
+    streamsData = mapToInteger(extractColumn(8))
 
+    # Creating a bar chart
+    createBarChart("Danceability Affect on Streams", "Example", artistData, streamsData, "Danceability(%)", "Streams(million)")
+
+     # Extracting data for keys and streams
+    valenceData = mapToInteger(extractColumn(18))
+    streamsData = mapToInteger(extractColumn(8))
+
+    # Creating a bar chart
+    createBarChart("Valence Affect on Streams", "Example", valenceData, streamsData, "valence(%)", "Streams(million)") # Extracting data for keys and streams
+    energyData = mapToInteger(extractColumn(19))
+    streamsData = mapToInteger(extractColumn(8))
+
+    # Creating a bar chart
+    createBarChart("Energy Affect on Streams", "Example", energyData, streamsData, "Energy(%)", "Streams(million)")
 
 #--- CODE YOUR INDIVIDUAL WORK IN THIS SPACE ---
 
