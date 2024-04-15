@@ -240,11 +240,12 @@ def displayRomaAnalysis():
 
     createBarChart("Graph of Key's Effect on Streams", keyData, streamsData, "Key", "Streams")
     createBarChart("Graph of Mode's Effect on Streams", modeData, streamsData, "Mode", "Streams" )
+  
     
     fig, ax = plt.subplots(1, 3, figsize=(20, 5))
-    createDualLineGraphOnSubplot(ax[0], "Graph of Key and Mode's Effect on Apple Charts", keyData, modeData, appleMusicChartsData, "Key", "Mode", "Apple Music Charts")
-    createDualLineGraphOnSubplot(ax[1], "Graph of Key and Mode's Effect on Shazam Charts", keyData, modeData, shazamChartsData, "Key", "Mode", "Shazam Charts")
-    createDualLineGraphOnSubplot(ax[2], "Graph of Key and Mode's Effect on Spotify Charts", keyData, modeData, spotifyChartsData, "Key", "Mode", "Spotify Charts")
+    createLineGraphOnSubplot(ax[0], "Graph of Key's Effect on Apple Music Charts", keyData, appleMusicChartsData, "Key", "Apple Music Charts")
+    createLineGraphOnSubplot(ax[1],"Graph of Key's Effect on Shazam Charts", keyData, shazamChartsData, "Key", "Shazam Charts")
+    createLineGraphOnSubplot(ax[2],"Graph of Key's Effect on Spotify Charts", keyData, spotifyChartsData, "Key", "Spotify Charts")
     plt.tight_layout()
     plt.show()
 
