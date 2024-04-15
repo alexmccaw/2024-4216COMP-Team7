@@ -177,14 +177,14 @@ def displayShannonAnalysis():
     #Plotting individual graphs: 
 
     createLineGraphOnSubplot(axs[0][0], "Release Year for Danceability", releaseYearData, danceabilityData, "Release Year", "Danceability")
-    createLineGraphOnSubplot(axs[1][0], "Release Month for Danceability", releaseMonthData, danceabilityData, "Release Year", "Danceability")
-    createLineGraphOnSubplot(axs[2][0], "Release Day for Danceability", releaseDayData, danceabilityData, "Release Year", "Danceability")
+    createLineGraphOnSubplot(axs[1][0], "Release Month for Danceability", releaseMonthData, danceabilityData, "Release Month", "Danceability")
+    createLineGraphOnSubplot(axs[2][0], "Release Day for Danceability", releaseDayData, danceabilityData, "Release Day", "Danceability")
     createLineGraphOnSubplot(axs[0][1], "Release Year for Valence", releaseYearData, valenceData, "Release Year", "Valence")
-    createLineGraphOnSubplot(axs[1][1], "Release Month for Valence", releaseMonthData, valenceData, "Release Year", "Valence")
-    createLineGraphOnSubplot(axs[2][1], "Release Day for Valence", releaseDayData, valenceData, "Release Year", "Valence")
+    createLineGraphOnSubplot(axs[1][1], "Release Month for Valence", releaseMonthData, valenceData, "Release Month", "Valence")
+    createLineGraphOnSubplot(axs[2][1], "Release Day for Valence", releaseDayData, valenceData, "Release Day", "Valence")
     createLineGraphOnSubplot(axs[0][2], "Release Year for Energy", releaseYearData, energyData, "Release Year", "Energy")
-    createLineGraphOnSubplot(axs[1][2], "Release Month for Energy", releaseMonthData, energyData, "Release Year", "Energy")
-    createLineGraphOnSubplot(axs[2][2], "Release Day for Energy", releaseDayData, energyData, "Release Year", "Energy")
+    createLineGraphOnSubplot(axs[1][2], "Release Month for Energy", releaseMonthData, energyData, "Release Month", "Energy")
+    createLineGraphOnSubplot(axs[2][2], "Release Day for Energy", releaseDayData, energyData, "Release Day", "Energy")
 
     plt.tight_layout()
     plt.show()
@@ -209,13 +209,60 @@ def displayShaunaAnalysis():
     createLineGraphOnSubplot(axs[4], "Artist Name in Shazam Charts", artistNameData, shazamChartsData, "Artist Name", "Shazam Charts")
     plt.tight_layout()
     plt.show()
+    
+    #SHAUNA
+    # Group by artist(s)_name and count the number of entries in Spotify charts
+    artist_spotify_chart_entries = df.groupby('artist(s)_name').size().sort_values(ascending=False).head(50)
+
+    # Create a horizontal bar plot for the top 50 artist(s) based on the number of entries in Spotify charts
+    plt.figure(figsize=(10, 12))
+    artist_spotify_chart_entries.plot(kind='barh', color='skyblue')
+    plt.title('Top 50 Artist(s) Entries in Spotify Charts')
+    plt.xlabel('Number of Entries in Spotify Charts')
+    plt.ylabel('Artist(s)')
+    plt.tight_layout()
+    plt.show()
+    # Group by artist(s)_name and count the number of entries in Apple Music charts
+    artist_apple_chart_entries = df.groupby('artist(s)_name')['in_apple_charts'].sum().sort_values(ascending=False).head(50)
+    # Create a horizontal bar plot for the top 50 artist(s) based on the number of entries in Apple Music charts
+    plt.figure(figsize=(10, 12))
+    artist_apple_chart_entries.plot(kind='barh', color='skyblue')
+    plt.title('Top 50 Artist(s) Entries in Apple Music Charts')
+    plt.xlabel('Number of Entries in Apple Music Charts')
+    plt.ylabel('Artist(s)')
+    plt.tight_layout()
+    plt.show()
+    
+    # Convert 'in_shazam_charts' column to numeric, replacing non-numeric values with NaN
+    df['in_shazam_charts'] = pd.to_numeric(df['in_shazam_charts'], errors='coerce')
+    # Group by artist(s)_name and sum the entries in Shazam charts
+    artist_shazam_chart_entries = df.groupby('artist(s)_name')['in_shazam_charts'].sum().dropna().sort_values(ascending=False).head(50)
+    
+    # Create a horizontal bar plot for the top 50 artist(s) based on the number of entries in Shazam charts
+    plt.figure(figsize=(10, 12))
+    artist_shazam_chart_entries.plot(kind='barh', color='skyblue')
+    plt.title('Top 50 Artist(s) Entries in Shazam Charts')
+    plt.xlabel('Number of Entries in Shazam Charts')
+    plt.ylabel('Artist(s)')
+    plt.tight_layout()
+    plt.show()
+
 
 def displayRomaAnalysis():
     keyData = (extractColumn(15))
     streamsData = mapToInteger(extractColumn(8))
+    modeData = (extractColumn(16))
+    appleMusicChartsData = mapToInteger(extractColumn(10))
+    shazamChartsData = mapToInteger(extractColumn(13))
+    spotifyChartsData = mapToInteger(extractColumn(7))
 
-    createBarChart("Graph of Key's Effect on Streams", "How does Key affect popularity of a song?",
-                   keyData, sorted(streamsData), "Key", "Streams")
+
+    createBarChart("Graph of Key's Effect on Streams", keyData, streamsData, "Key", "Streams")
+    createBarChart("Graph of Mode's Effect on Streams", modeData, streamsData, "Mode", "Streams" )
+    createDualLineGraphOnSubplot("Graph of Key and Mode's Effect on Apple Charts", keyData, modeData, appleMusicChartsData, "Key", "Mode", "Apple Music Charts")
+    createDualLineGraphOnSubplot("Graph of Key and Mode's Effect on Shazam Charts", keyData, modeData, shazamChartsData, "Key", "Mode", "Shazam Charts")
+    createDualLineGraphOnSubplot("Graph of Key and Mode's Effect on Spotify Charts", keyData, modeData, spotifyChartsData, "Key", "Mode", "Spotify Charts")
+
 
 def displaySushilAnalysis():
     
