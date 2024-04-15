@@ -152,6 +152,7 @@ def displayAlexAnalysis():
                                 livenessData, "Instrumentalness (%)", "Liveness (%)")
     
     plt.subplots_adjust(wspace=0.15)
+    #fig.canvas.manager.full_screen_toggle()  # Toggle fullscreen mode on, press Ctrl + F to toggle
     plt.tight_layout()
     plt.show()
 
