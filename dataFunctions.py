@@ -220,12 +220,23 @@ def displayRomaAnalysis():
 def displaySushilAnalysis():
     
     # Extracting data for keys and streams
-    artistData = mapToInteger(extractColumn(18))
+    artistData = mapToInteger(extractColumn(17))
     streamsData = mapToInteger(extractColumn(8))
 
     # Creating a bar chart
-    createBarChart("Artists Count's Affect on Streams", "Example", artistData, streamsData, "Danceability(%)", "Streams(million)")
+    createBarChart("Danceability Affect on Streams", "Example", artistData, streamsData, "Danceability(%)", "Streams(million)")
 
+     # Extracting data for keys and streams
+    valenceData = mapToInteger(extractColumn(18))
+    streamsData = mapToInteger(extractColumn(8))
+
+    # Creating a bar chart
+    createBarChart("Valence Affect on Streams", "Example", valenceData, streamsData, "valence(%)", "Streams(million)") # Extracting data for keys and streams
+    energyData = mapToInteger(extractColumn(19))
+    streamsData = mapToInteger(extractColumn(8))
+
+    # Creating a bar chart
+    createBarChart("Energy Affect on Streams", "Example", energyData, streamsData, "Energy(%)", "Streams(million)")
 
 #--- CODE YOUR INDIVIDUAL WORK IN THIS SPACE ---
 
