@@ -198,7 +198,7 @@ def displayShaunaAnalysis():
     #SHAUNA
     # Group by artist(s)_name and count the number of entries in Spotify charts
     df = pd.read_csv('spotify-2023.csv')
-    artist_spotify_chart_entries = df.groupby('artist(s)_name').size().sort_values(ascending=False).head(50)
+    artist_spotify_chart_entries = df.groupby('artist(s)_name')['in_spotify_charts'].sum().sort_values(ascending=False).head(50)
 
     # Create a horizontal bar plot for the top 50 artist(s) based on the number of entries in Spotify charts
     plt.figure(figsize=(10, 12))
