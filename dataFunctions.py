@@ -211,7 +211,7 @@ def displayShaunaAnalysis():
 
     # Create a horizontal bar plot for the top 50 artist(s) based on the number of entries in Spotify charts
     plt.figure(figsize=(10, 12))
-    artist_spotify_chart_entries.plot(kind='barh', color='skyblue')
+    artist_spotify_chart_entries.plot(kind='barh', color='green')
     plt.title('Top 50 Artist(s) Entries in Spotify Charts')
     plt.xlabel('Number of Entries in Spotify Charts')
     plt.ylabel('Artist(s)')
@@ -221,7 +221,7 @@ def displayShaunaAnalysis():
     artist_apple_chart_entries = df.groupby('artist(s)_name')['in_apple_charts'].sum().sort_values(ascending=False).head(50)
     # Create a horizontal bar plot for the top 50 artist(s) based on the number of entries in Apple Music charts
     plt.figure(figsize=(10, 12))
-    artist_apple_chart_entries.plot(kind='barh', color='skyblue')
+    artist_apple_chart_entries.plot(kind='barh', color='Black')
     plt.title('Top 50 Artist(s) Entries in Apple Music Charts')
     plt.xlabel('Number of Entries in Apple Music Charts')
     plt.ylabel('Artist(s)')
@@ -235,7 +235,7 @@ def displayShaunaAnalysis():
     
     # Create a horizontal bar plot for the top 50 artist(s) based on the number of entries in Shazam charts
     plt.figure(figsize=(10, 12))
-    artist_shazam_chart_entries.plot(kind='barh', color='skyblue')
+    artist_shazam_chart_entries.plot(kind='barh', color='red')  # Change color to Red
     plt.title('Top 50 Artist(s) Entries in Shazam Charts')
     plt.xlabel('Number of Entries in Shazam Charts')
     plt.ylabel('Artist(s)')
