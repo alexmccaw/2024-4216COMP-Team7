@@ -236,14 +236,16 @@ def displayShaunaAnalysis():
 def displayRomaAnalysis():
     keyData = (extractColumn(15))
     streamsData = mapToInteger(extractColumn(8))
-    modeData = (extractColumn(16))
+    modeData = extractColumn(16)
+    modeData_numeric = [1 if mode == 'Major' else 0 for mode in modeData]
     appleMusicChartsData = mapToInteger(extractColumn(10))
     shazamChartsData = mapToInteger(extractColumn(13))
     spotifyChartsData = mapToInteger(extractColumn(7))
 
     fig, ax = plt.subplots(1, 2, figsize=(20, 5))
     createBarGraphOnSubplot(ax[0],"Graph of Key's Effect on Streams", keyData, streamsData, "Key", "Streams")
-    createBarGraphOnSubplot(ax[1],"Graph of Mode's Effect on Streams", modeData, streamsData, "Mode", "Streams")
+    ax[1].pie([sum(modeData_numeric), len(modeData_numeric)-sum(modeData_numeric)], labels=['Major', 'Minor'], autopct='%1.1f%%', startangle=140)
+    ax[1].set_title("Mode's Effect on Streams")
     plt.tight_layout()
     plt.show()
 
