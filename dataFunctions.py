@@ -167,6 +167,15 @@ def displayJakeAnalysis():
     createBarChart("Artists Count's Affect on Streams", artistCountData,
                    streamsData, "Artist Count", "Streams(million)")
 
+def createBarChart(title, x_data, y_data, x_label, y_label, color='green'):
+    plt.bar(x_data, y_data, color=color)  # Assuming you're using Matplotlib
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    plt.title(title)
+    plt.show()
+
+
+
 def displayShannonAnalysis():
     releaseYearData = mapToInteger(extractColumn(3))
     releaseMonthData = mapToInteger(extractColumn(4))
