@@ -248,9 +248,9 @@ def displayRomaAnalysis():
     plt.show()
 
     fig, ax = plt.subplots(1, 3, figsize=(20, 5))
-    createLineGraphOnSubplot(ax[0], "Graph of Key's Effect on Apple Music Charts", keyData, appleMusicChartsData, "Key", "Apple Music Charts")
-    createLineGraphOnSubplot(ax[1],"Graph of Key's Effect on Shazam Charts", keyData, shazamChartsData, "Key", "Shazam Charts")
-    createLineGraphOnSubplot(ax[2],"Graph of Key's Effect on Spotify Charts", keyData, spotifyChartsData, "Key", "Spotify Charts")
+    createBarGraphOnSubplot(ax[0], "Graph of Key's Effect on Apple Music Charts", keyData, appleMusicChartsData, "Key", "Apple Music Charts")
+    createBarGraphOnSubplot(ax[1],"Graph of Key's Effect on Shazam Charts", keyData, shazamChartsData, "Key", "Shazam Charts")
+    createBarGraphOnSubplot(ax[2],"Graph of Key's Effect on Spotify Charts", keyData, spotifyChartsData, "Key", "Spotify Charts")
     plt.tight_layout()
     plt.show()
 
