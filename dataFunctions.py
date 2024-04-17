@@ -251,10 +251,20 @@ def displayRomaAnalysis():
     shazamChartsData = mapToInteger(extractColumn(13))
     spotifyChartsData = mapToInteger(extractColumn(7))
 
+    
     fig, ax = plt.subplots(1, 2, figsize=(20, 5))
-    createBarGraphOnSubplot(ax[0],"Graph of Key's Effect on Streams", keyData, streamsData, "Key", "Streams")
-    ax[1].pie([sum(modeData_numeric), len(modeData_numeric)-sum(modeData_numeric)], labels=['Major', 'Minor'], autopct='%1.1f%%', startangle=140)
-    ax[1].set_title("Mode's Effect on Streams")
+    createBarGraphOnSubplot(ax[0], "Graph of Key's Effect on Streams", keyData, streamsData, "Key", "Streams")
+
+    # Data for the pie chart
+    sizes = [sum(modeData_numeric), len(modeData_numeric) - sum(modeData_numeric)]
+    labels = ['Major', 'Minor']
+    colors = ['lightblue', 'lightgreen']
+    explode = (0.1, 0)  
+
+    ax[1].pie(sizes, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', startangle=140)
+    ax[1].axis('equal')  
+    ax[1].set_title("Graph of Mode's Effect on Streams")
+
     plt.tight_layout()
     plt.show()
 
