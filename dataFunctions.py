@@ -251,7 +251,6 @@ def displayRomaAnalysis():
     shazamChartsData = mapToInteger(extractColumn(13))
     spotifyChartsData = mapToInteger(extractColumn(7))
 
-    
     fig, ax = plt.subplots(1, 2, figsize=(20, 5))
     createBarGraphOnSubplot(ax[0], "Graph of Key's Effect on Streams", keyData, streamsData, "Key", "Streams")
 
