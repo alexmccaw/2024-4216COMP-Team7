@@ -7,9 +7,12 @@ To run my visualisation, run the dataFunctions.py file in the Python terminal an
 --- Sushil's Visualisation ---
 To run my visualisation, run the dataFunctions.py file in the Python terminal and then select the seventh button, "Analysis of Danceability,valence and energy's affect on Streams".
 
---- Shaunas Visualisation ---
-To run my visualisation, run the dataFunctions.py file in the Python terminal and then select the fith button, " Analysis of how specific artits affect popularity across playlistst and charts ".
+--- Shauna's Visualisation ---
+To run my visualisation, run the dataFunctions.py file in the Python terminal and then select the fifth button, " Analysis of how Specific Artits affect Popularity across Playlists and Charts ".
 
+--- Roma's Visualisation ---
+To run my visualisation, run the dataFunctions.py file in the Python terminal and then select the sixth button, " Analysis of how the Key and Mode affects the Popularity of Songs ".
 
-
+--- Alex's Visualisation ---
+To run my visualisation, run the dataFunctions.py file in the Python terminal and then select the first button, " Analysis of how BPM against Chart Data ".
 
