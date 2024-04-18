@@ -1,3 +1,6 @@
+--- Liv's Visualisation ---
+To run my visualisation, is to run the dataFunctions.py file in the Python terminal and then select the second button, "Analysis of Streams against Charts".
+
 --- Shannon's Visualisation ---
 To run my visualisation, run the dataFunctions.py file in the Python terminal and then select the fourth button, "Analysis of how Release Dates affect Streams".
 
