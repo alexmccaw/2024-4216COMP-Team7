@@ -1,30 +1,42 @@
 --- Shannon's Visualisation ---
-To run my visualisation, run the dataFunctions.py file in the Python terminal and then select the fourth button, "Analysis of how Release Dates affect Streams".
+To run my visualisation, run the dataFunctions.py file in the Python terminal and then select the fifth button, "Analysis of how specific artists affect Popularity across Playlists and Charts".
 
-def displayShannonAnalysis():
-    releaseYearData = mapToInteger(extractColumn(3))
-    releaseMonthData = mapToInteger(extractColumn(4))
-    releaseDayData = mapToInteger(extractColumn(5))
-    danceabilityData = mapToInteger(extractColumn(17))
-    valenceData = mapToInteger(extractColumn(18))
-    energyData = mapToInteger(extractColumn(19))
+def displayShaunaAnalysis():
+    
+    #SHAUNA
+    # Group by artist(s)_name and count the number of entries in Spotify charts
+    df = pd.read_csv('spotify-2023.csv')
+    artist_spotify_chart_entries = df.groupby('artist(s)_name')['in_spotify_charts'].sum().sort_values(ascending=False).head(50)
 
-    #Plotting of figure with multiple axes, in this case, a 3x3 figure so 9 graphs can be shown
-    fig, axs = plt.subplots(3, 3)
-
-    #Plotting individual graphs: 
-
-    createLineGraphOnSubplot(axs[0][0], "Release Year for Danceability", releaseYearData, danceabilityData, "Release Year", "Danceability")
-    createLineGraphOnSubplot(axs[1][0], "Release Month for Danceability", releaseMonthData, danceabilityData, "Release Month", "Danceability")
-    createLineGraphOnSubplot(axs[2][0], "Release Day for Danceability", releaseDayData, danceabilityData, "Release Day", "Danceability")
-    createLineGraphOnSubplot(axs[0][1], "Release Year for Valence", releaseYearData, valenceData, "Release Year", "Valence")
-    createLineGraphOnSubplot(axs[1][1], "Release Month for Valence", releaseMonthData, valenceData, "Release Month", "Valence")
-    createLineGraphOnSubplot(axs[2][1], "Release Day for Valence", releaseDayData, valenceData, "Release Day", "Valence")
-    createLineGraphOnSubplot(axs[0][2], "Release Year for Energy", releaseYearData, energyData, "Release Year", "Energy")
-    createLineGraphOnSubplot(axs[1][2], "Release Month for Energy", releaseMonthData, energyData, "Release Month", "Energy")
-    createLineGraphOnSubplot(axs[2][2], "Release Day for Energy", releaseDayData, energyData, "Release Day", "Energy")
-
+    # Create a horizontal bar plot for the top 50 artist(s) based on the number of entries in Spotify charts
+    plt.figure(figsize=(10, 12))
+    artist_spotify_chart_entries.plot(kind='barh', color='green')
+    plt.title('Top 50 Artist(s) Entries in Spotify Charts')
+    plt.xlabel('Number of Entries in Spotify Charts')
+    plt.ylabel('Artist(s)')
     plt.tight_layout()
     plt.show()
-
-
+    # Group by artist(s)_name and count the number of entries in Apple Music charts
+    artist_apple_chart_entries = df.groupby('artist(s)_name')['in_apple_charts'].sum().sort_values(ascending=False).head(50)
+    # Create a horizontal bar plot for the top 50 artist(s) based on the number of entries in Apple Music charts
+    plt.figure(figsize=(10, 12))
+    artist_apple_chart_entries.plot(kind='barh', color='Black')
+    plt.title('Top 50 Artist(s) Entries in Apple Music Charts')
+    plt.xlabel('Number of Entries in Apple Music Charts')
+    plt.ylabel('Artist(s)')
+    plt.tight_layout()
+    plt.show()
+    
+    # Convert 'in_shazam_charts' column to numeric, replacing non-numeric values with NaN
+    df['in_shazam_charts'] = pd.to_numeric(df['in_shazam_charts'], errors='coerce')
+    # Group by artist(s)_name and sum the entries in Shazam charts
+    artist_shazam_chart_entries = df.groupby('artist(s)_name')['in_shazam_charts'].sum().dropna().sort_values(ascending=False).head(50)
+    
+    # Create a horizontal bar plot for the top 50 artist(s) based on the number of entries in Shazam charts
+    plt.figure(figsize=(10, 12))
+    artist_shazam_chart_entries.plot(kind='barh', color='red')  # Change color to Red
+    plt.title('Top 50 Artist(s) Entries in Shazam Charts')
+    plt.xlabel('Number of Entries in Shazam Charts')
+    plt.ylabel('Artist(s)')
+    plt.tight_layout()
+    plt.show()
