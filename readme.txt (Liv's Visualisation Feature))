@@ -1,0 +1,41 @@
+--- Liv's Visualisation ---
+To run my visualisation, is to run the dataFunctions.py file in the Python terminal and then select the second button, "Analysis of Streams against Charts".
+
+Here is my visualisation data code: 
+
+def displayLivAnalysis():
+    #Data processing using functions
+    streamsData = mapToInteger(extractColumn(8))
+    spotifyPlaylistData = mapToInteger(extractColumn(6))
+    appleMusicPlaylistData = mapToInteger(extractColumn(9))
+    shazamChartsData = mapToInteger(extractColumn(13))
+    spotifyChartsData = mapToInteger(extractColumn(7))
+    appleMusicChartsData = mapToInteger(extractColumn(10))
+
+    #Plotting of figure with multiple axes, in this case, 2x3 so 6 graphs can be shown
+    fig, axs = plt.subplots(2, 3)
+
+    #Plotting individual graphs: 
+
+    createDualLineGraphOnSubplot(axs[0][0], "Streams in Spotify and Apple Playlists", streamsData, 
+                                 spotifyPlaylistData, appleMusicPlaylistData,
+                                 "Streams", "Spotify", "Apple")
+
+    createDualLineGraphOnSubplot(axs[0][1],"Streams in Spotify Playlists and Shazam Charts", streamsData, 
+                                 spotifyPlaylistData, shazamChartsData, "Streams", "Spotify Playlist", 
+                                 "Shazam Charts")
+
+    createDualLineGraphOnSubplot(axs[0][2], "Streams in Spotify Charts and Shazam Charts",  
+                                 streamsData, spotifyChartsData, shazamChartsData, "Streams", "Spotify Charts", "Shazam Charts")
+
+    createDualLineGraphOnSubplot(axs[1][0],"Streams in Apple Playlists and the Spotify Charts", streamsData,
+                          appleMusicChartsData, spotifyChartsData, "Streams", "Apple Music Charts", "Spotify Charts")
+
+    createDualLineGraphOnSubplot(axs[1][1], "Streams in the Shazam Charts and Apple Music Charts", 
+                                 streamsData, shazamChartsData, appleMusicChartsData, "Streams", "Shazam Charts", "Apple Music Charts")
+
+    createDualLineGraphOnSubplot(axs[1][2], "Streams in the Shazam Charts and the Apple Music Playlists", 
+                                 streamsData, shazamChartsData, appleMusicPlaylistData, "Streams", "Shazam Charts", "Apple Music Playlist")
+
+    plt.tight_layout()
+    plt.show()
